@@ -1,13 +1,12 @@
-import { Container } from '@chakra-ui/react';
 import React from 'react';
 import Navbar from './navbar';
 
 const Layout = ({ children }) => (
   <>
-    <Container>
+    <div className="container mx-auto px-5">
       <Navbar />
       <main>{children}</main>
-    </Container>
+    </div>
   </>
 );
 
