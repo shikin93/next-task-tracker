@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFilterStatus } from '../states/todos';
 import TodoModal from './todoModal';
+import { updateFilterStatus } from '../states/todos';
 
 const AppHeader = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,7 +20,7 @@ const AppHeader = () => {
         Add Task
       </button>
       <select
-        className="px-4 py-2 rounded-md"
+        className="px-4 py-2 rounded-md bg-slate-200"
         id="status"
         onChange={(e) => updateFilter(e)}
         value={filterStatus}

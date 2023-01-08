@@ -1,16 +1,37 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import { v4 as uuid } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { addTodo } from '../states/todos';
 
 const TodoModal = ({ open, close }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('incomplete');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      title,
-      status,
-    });
+    if (title === '') {
+      toast.error('Please input title');
+      return;
+    }
+
+    if (title && status) {
+      dispatch(
+        addTodo({
+          id: uuid,
+          title,
+          status,
+          time: new Date().toLocaleString(),
+        }),
+      );
+      setStatus('incomplete');
+      setTitle('');
+      toast.success('Task added successfully');
+    }
+
+    close(false);
   };
 
   return (
