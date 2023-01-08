@@ -1,9 +1,10 @@
 import React from 'react';
+import AppHeader from '../components/appHeader';
 
 const Home = () => (
   <div>
-    <h1>Hello</h1>
+    <AppHeader />
   </div>
-)
+);
 
 export default Home;
