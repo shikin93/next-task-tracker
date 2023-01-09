@@ -1,13 +1,23 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { MdCheck, MdDelete } from 'react-icons/md';
 import { Transition } from '@headlessui/react';
 import { useDispatch } from 'react-redux';
-import { removeTodo } from '../states/todos';
+import { removeTodo, updateTodo } from '../states/todos';
 
 const TodoItem = ({ todo }) => {
-  const [isShowing, setIsShowing] = useState(false);
   const dispatch = useDispatch();
+
+  const [isShowing, setIsShowing] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (todo.status === 'complete') {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [todo.status]);
 
   setTimeout(() => {
     setIsShowing(true);
@@ -22,6 +32,15 @@ const TodoItem = ({ todo }) => {
     }, '300');
   };
 
+  const handleCheck = () => {
+    setIsChecked(!isChecked);
+    dispatch(updateTodo({ ...todo, status: isChecked ? 'incomplete' : 'complete' }));
+  };
+
+  function cn(...classes) {
+    return classes.filter(Boolean).join(' ');
+  }
+
   return (
     <Transition
       as={Fragment}
@@ -33,23 +52,34 @@ const TodoItem = ({ todo }) => {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-75"
     >
-      <div className="bg-cyan-500 rounded-md my-2 p-4 flex items-center justify-between transition-all">
+      <div className="bg-slate-800 rounded-md my-2 p-4 flex items-center justify-between transition-all">
         <div>
-          <p className="font-bold text-xl text-slate-50">{todo.title}</p>
+          <p className={cn(
+            'font-bold text-xl text-slate-50',
+            isChecked
+              ? 'line-through text-slate-400'
+              : 'no-underline',
+          )}>{todo.title}</p>
           <p className="text-sm text-slate-50">
             {format(new Date(todo.time), 'p,MM/dd/yyyy')}
           </p>
         </div>
         <div className="flex gap-2">
-          <button type="button" onClick={handleDelete} className="bg-slate-50 text-xl p-1 rounded-md hover:bg-red-500">
+          <button type="button" onClick={handleDelete} className="bg-slate-50 text-xl p-1 rounded-md hover:bg-red-400">
             <MdDelete />
           </button>
-          <button className="bg-slate-50 text-xl p-1 rounded-md hover:bg-green-500">
+          <button type="button" onClick={handleCheck} className={cn(
+            'text-xl p-1 rounded-md hover:bg-green-400',
+            todo.status === 'complete'
+              ? 'bg-green-400'
+              : 'bg-slate-50',
+          )}
+          >
             <MdCheck />
           </button>
         </div>
       </div>
-    </Transition>
+    </Transition >
   );
 };
 

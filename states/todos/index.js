@@ -19,12 +19,21 @@ const todoListSlice = createSlice({
         }
       });
     },
+    updateTodo(state, action) {
+      state.todos.forEach((todo) => {
+        if (todo.id === action.payload.id) {
+          todo.status = action.payload.status;
+        }
+      });
+    },
     updateFilterStatus(state, action) {
       state.status = action.payload;
     },
   },
 });
 
-export const { addTodo, removeTodo, updateFilterStatus } = todoListSlice.actions;
+export const {
+  addTodo, removeTodo, updateFilterStatus, updateTodo,
+} = todoListSlice.actions;
 
 export default todoListSlice.reducer;
