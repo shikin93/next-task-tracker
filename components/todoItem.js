@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { MdCheck, MdDelete } from 'react-icons/md';
 import { Transition } from '@headlessui/react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
 import { removeTodo, updateTodo } from '../states/todos';
 
 const TodoItem = ({ todo }) => {
@@ -29,6 +30,7 @@ const TodoItem = ({ todo }) => {
       dispatch(
         removeTodo(todo.id),
       );
+      toast.success('Todo deleted successfully');
     }, '300');
   };
 
@@ -52,7 +54,7 @@ const TodoItem = ({ todo }) => {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-75"
     >
-      <div className="bg-slate-800 rounded-md my-2 p-4 flex items-center justify-between transition-all">
+      <div className="bg-slate-800 rounded-md my-2 p-4 shadow-md shadow-slate-500 flex items-center justify-between transition-all">
         <div>
           <p className={cn(
             'font-bold text-xl text-slate-50',

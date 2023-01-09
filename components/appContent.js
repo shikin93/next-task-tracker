@@ -13,8 +13,6 @@ const AppContent = () => {
     return item.status === filterStatus;
   });
 
-  console.log(todoList);
-
   return (
     <div className="mt-4">
       {
