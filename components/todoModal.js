@@ -20,7 +20,7 @@ const TodoModal = ({ open, close }) => {
     if (title && status) {
       dispatch(
         addTodo({
-          id: uuid,
+          id: uuid(),
           title,
           status,
           time: new Date().toLocaleString(),

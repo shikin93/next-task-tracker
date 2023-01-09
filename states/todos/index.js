@@ -13,7 +13,11 @@ const todoListSlice = createSlice({
       state.todos.push(action.payload);
     },
     removeTodo(state, action) {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
+      state.todos.forEach((todo, index) => {
+        if (todo.id === action.payload) {
+          state.todos.splice(index, 1);
+        }
+      });
     },
     updateFilterStatus(state, action) {
       state.status = action.payload;
