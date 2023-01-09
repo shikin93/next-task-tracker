@@ -27,16 +27,16 @@ const TodoItem = ({ todo }) => {
   const handleDelete = () => {
     setIsShowing(false);
     setTimeout(() => {
-      dispatch(
-        removeTodo(todo.id),
-      );
+      dispatch(removeTodo(todo.id));
       toast.success('Todo deleted successfully');
     }, '300');
   };
 
   const handleCheck = () => {
     setIsChecked(!isChecked);
-    dispatch(updateTodo({ ...todo, status: isChecked ? 'incomplete' : 'complete' }));
+    dispatch(
+      updateTodo({ ...todo, status: isChecked ? 'incomplete' : 'complete' }),
+    );
   };
 
   function cn(...classes) {
@@ -54,34 +54,41 @@ const TodoItem = ({ todo }) => {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-75"
     >
-      <div className="bg-slate-800 rounded-md my-2 p-4 shadow-md shadow-slate-500 flex items-center justify-between transition-all">
+      <div className="my-2 flex items-center justify-between rounded-md bg-slate-800 p-4 shadow-md shadow-slate-500 transition-all">
         <div>
-          <p className={cn(
-            'font-bold text-xl text-slate-50',
-            isChecked
-              ? 'line-through text-slate-400'
-              : 'no-underline',
-          )}>{todo.title}</p>
+          <p
+            className={cn(
+              'text-xl font-bold text-slate-50',
+              isChecked ? 'text-slate-400 line-through' : 'no-underline',
+            )}
+          >
+            {todo.title}
+          </p>
           <p className="text-sm text-slate-50">
             {format(new Date(todo.time), 'p,MM/dd/yyyy')}
           </p>
         </div>
         <div className="flex gap-2">
-          <button type="button" onClick={handleDelete} className="bg-slate-50 text-xl p-1 rounded-md hover:bg-red-400">
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="rounded-md bg-slate-50 p-1 text-xl hover:bg-red-400"
+          >
             <MdDelete />
           </button>
-          <button type="button" onClick={handleCheck} className={cn(
-            'text-xl p-1 rounded-md hover:bg-green-400',
-            todo.status === 'complete'
-              ? 'bg-green-400'
-              : 'bg-slate-50',
-          )}
+          <button
+            type="button"
+            onClick={handleCheck}
+            className={cn(
+              'rounded-md p-1 text-xl hover:bg-green-400',
+              todo.status === 'complete' ? 'bg-green-400' : 'bg-slate-50',
+            )}
           >
             <MdCheck />
           </button>
         </div>
       </div>
-    </Transition >
+    </Transition>
   );
 };
 

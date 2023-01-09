@@ -15,17 +15,13 @@ const AppContent = () => {
 
   return (
     <div className="mt-4">
-      {
-        filteredTodoList.length > 0 ? (
-          filteredTodoList.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
-          ))
-        ) : (
-          <div className="bg-slate-100 rounded-md text-center text-slate-500 py-4">
-            No Tasks
-          </div>
-        )
-      }
+      {filteredTodoList.length > 0 ? (
+        filteredTodoList.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+      ) : (
+        <div className="rounded-md bg-slate-100 py-4 text-center text-slate-500">
+          No Tasks
+        </div>
+      )}
     </div>
   );
 };

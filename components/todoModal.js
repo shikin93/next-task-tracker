@@ -64,14 +64,36 @@ const TodoModal = ({ open, close }) => {
                   Add Todo
                 </Dialog.Title>
                 <form onSubmit={handleSubmit}>
-                  <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="my-4 border border-slate-300 p-2 rounded-md w-full" />
-                  <select id="status" value={status} onChange={(e) => setStatus(e.target.value)} className="w-full p-2 mb-10 mt-2 rounded-md">
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="my-4 w-full rounded-md border border-slate-300 p-2"
+                  />
+                  <select
+                    id="status"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    className="mb-10 mt-2 w-full rounded-md p-2"
+                  >
                     <option value="incomplete">Incomplete</option>
                     <option value="complete">Complete</option>
                   </select>
                   <div className="flex gap-4">
-                    <button type="submit" className="bg-orange-500 px-4 py-1 rounded-md text-slate-50">Add Task</button>
-                    <button type="button" onClick={close} className="bg-slate-300 px-4 py-2 rounded-md text-slate-500">Cancel</button>
+                    <button
+                      type="submit"
+                      className="rounded-md bg-orange-500 px-4 py-1 text-slate-50"
+                    >
+                      Add Task
+                    </button>
+                    <button
+                      type="button"
+                      onClick={close}
+                      className="rounded-md bg-slate-300 px-4 py-2 text-slate-500"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </form>
               </Dialog.Panel>

@@ -7,7 +7,7 @@ const Layout = ({ children }) => (
     <Head>
       <title>Todo App</title>
     </Head>
-    <div className="container max-w-3xl mx-auto px-5">
+    <div className="container mx-auto max-w-3xl px-5">
       <Navbar />
       <main>{children}</main>
     </div>

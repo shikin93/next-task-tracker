@@ -16,11 +16,15 @@ const AppHeader = () => {
 
   return (
     <div className="flex justify-between">
-      <button type="button" onClick={() => setModalOpen(true)} className="bg-orange-500 px-6 py-2 rounded-md text-slate-50">
+      <button
+        type="button"
+        onClick={() => setModalOpen(true)}
+        className="rounded-md bg-orange-500 px-6 py-2 text-slate-50"
+      >
         Add Task
       </button>
       <select
-        className="px-4 py-2 rounded-md bg-slate-200"
+        className="rounded-md bg-slate-200 px-4 py-2"
         id="status"
         onChange={(e) => updateFilter(e)}
         value={filterStatus}
